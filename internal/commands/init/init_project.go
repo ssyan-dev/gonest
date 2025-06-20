@@ -52,6 +52,9 @@ func createCmdDirMonorepo(project string) error {
 	if err := utils.CreateFile("templates/monorepo/Makefile.tmpl", project + "/Makefile"); err != nil {
 		return err
 	}
+	if err := utils.CreateFile("templates/README.md.tmpl", project + "/README.md"); err != nil {
+		return err
+	}
 
 	return nil
 }

@@ -56,3 +56,14 @@ func CreateFile(tmplPath, path string) error {
 
 	return tmpl.Execute(f, nil)
 }
+
+func StringJoin(strs []string, sep string) string {
+	result := ""
+	for i, s := range strs {
+		result += s
+		if i != len(strs) - 1 {
+			result += sep
+		}
+	}
+	return result
+}

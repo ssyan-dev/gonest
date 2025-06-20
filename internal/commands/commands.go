@@ -2,6 +2,8 @@ package commands
 
 import (
 	"fmt"
+
+	"github.com/ssyan-dev/gonest/internal/utils"
 )
 
 type Command struct {
@@ -12,8 +14,9 @@ type Command struct {
 }
 
 var (
-	HelpCommand = newCommand([]string{"-help", "-h"}, []string{}, "Show commands", "-help")
-	InitCommand = newCommand([]string{"-init", "-i", "-n", "-new"}, []string{"github.com/user/repo"}, "Init new project", "-init github.com/user/repo")
+	HelpCommand = newCommand([]string{"help", "h"}, []string{}, "Show commands", "help")
+	InitCommand = newCommand([]string{"init", "i", "n", "new"}, []string{"github.com/user/repo"}, "Init new project", "init github.com/user/repo")
+	AddCommand = newCommand([]string{"add"}, []string{"air"}, "Add plugins", "add air")
 )
 
 func newCommand(aliases, args []string, desc, example string) *Command {
@@ -43,16 +46,5 @@ func (c *Command) Help() {
 }
 
 func joinArgs(args []string) string {
-	return "[" + stringJoin(args, " ") + "]"
-}
-
-func stringJoin(strs []string, sep string) string {
-	result := ""
-	for i, s := range strs {
-		result += s
-		if i != len(strs) - 1 {
-			result += sep
-		}
-	}
-	return result
+	return "[" + utils.StringJoin(args, " ") + "]"
 }

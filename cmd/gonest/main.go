@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/ssyan-dev/gonest/internal/commands"
+	"github.com/ssyan-dev/gonest/internal/commands/add"
 	"github.com/ssyan-dev/gonest/internal/commands/help"
 	init_project "github.com/ssyan-dev/gonest/internal/commands/init"
 	"github.com/ssyan-dev/gonest/internal/parser"
@@ -21,6 +22,7 @@ func main() {
 	cmds := []*commands.Command{
 		commands.HelpCommand,
 		commands.InitCommand,
+		commands.AddCommand,
 	}
 
 	if len(os.Args) < 2 {
@@ -37,5 +39,7 @@ func main() {
 		help.HandlePrintHelp(cmds)
 	case commands.InitCommand:
 		init_project.HandleInitProject(res.Args)
+	case commands.AddCommand:
+		add.HandleAdd(res.Args)
 	}
 }
