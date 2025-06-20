@@ -13,7 +13,7 @@ type Command struct {
 
 var (
 	HelpCommand = newCommand([]string{"-help", "-h"}, []string{}, "Show commands", "-help")
-	InitCommand = newCommand([]string{"-init", "-i"}, []string{"github.com/user/repo"}, "Init new project", "-init github.com/user/repo")
+	InitCommand = newCommand([]string{"-init", "-i", "-n", "-new"}, []string{"github.com/user/repo"}, "Init new project", "-init github.com/user/repo")
 )
 
 func newCommand(aliases, args []string, desc, example string) *Command {
