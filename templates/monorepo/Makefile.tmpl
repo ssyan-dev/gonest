@@ -1,0 +1,18 @@
+APP_NAME = app
+
+MAIN_FILE = cmd/main.go
+BUILD_DIR = build
+
+build:
+    @echo "[${NAME}] >>> Building..."
+	go build -o ${BUILD_DIR}/${APP_NAME} ${MAIN_FILE}
+
+run:
+	@echo "[${NAME}] >>> Running..."
+	./${BUILD_DIR}/${APP_NAME}
+
+clean:
+	@echo "[${NAME}] >>> Cleaning..."
+	rm -rf ${BUILD_DIR}/
+
+all: clean build run

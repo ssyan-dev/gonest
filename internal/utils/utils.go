@@ -4,6 +4,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"text/template"
 )
 
 func ExecuteCommand(windowsCmd, unixCmd, dir string) error {
@@ -28,9 +29,30 @@ func ClearTerminal() error {
 	return ExecuteCommand("cls", "clear", "")
 }
 
-func CreateFolderIfNotExists(dir string) error {
-	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		return os.MkdirAll(dir, os.ModePerm)
+func CreateFolderIfNotExists(dir string) bool {
+	_, err := os.Stat(dir)
+	if err == nil {
+		return false
 	}
-	return nil
+	if os.IsNotExist(err) {
+		os.MkdirAll(dir, 0755)
+		return true
+	}
+
+	return false
+}
+
+func CreateFile(tmplPath, path string) error {
+	tmpl, err := template.ParseFiles(tmplPath)
+	if err != nil {
+		return err
+	}
+
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	return tmpl.Execute(f, nil)
 }
