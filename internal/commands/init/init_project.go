@@ -14,7 +14,7 @@ func HandleInitProject(args []string) {
 
 	log.Printf("Initializing project \"%s\"...", project)
 
-	if created := utils.CreateFolderIfNotExists(project); !created {
+	if ok := utils.CreateFolderIfNotExists(project); !ok {
 		log.Fatal("ERROR: already exists")
 	}
 
@@ -39,7 +39,7 @@ func HandleInitProject(args []string) {
 }
 
 func createCmdDirMonorepo(project string) error {
-	if created := utils.CreateFolderIfNotExists(project + "/cmd"); !created {
+	if ok := utils.CreateFolderIfNotExists(project + "/cmd"); !ok {
 		log.Fatal("ERROR: already exists")
 	}
 	
